@@ -1,0 +1,713 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="WSReservationService" targetNamespace="http://service.publicinterfaces.agimatec.com" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.publicinterfaces.agimatec.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://service.publicinterfaces.agimatec.com" xmlns:tns="http://service.publicinterfaces.agimatec.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="cancelReservation" type="tns:cancelReservation" />
+<xs:element name="cancelReservationResponse" type="tns:cancelReservationResponse" />
+<xs:element name="getAllMachines" type="tns:getAllMachines" />
+<xs:element name="getAllMachinesResponse" type="tns:getAllMachinesResponse" />
+<xs:element name="getAvailableBoxSizes" type="tns:getAvailableBoxSizes" />
+<xs:element name="getAvailableBoxSizesResponse" type="tns:getAvailableBoxSizesResponse" />
+<xs:element name="getAvailableFreeBoxesForMachine" type="tns:getAvailableFreeBoxesForMachine" />
+<xs:element name="getAvailableFreeBoxesForMachineResponse" type="tns:getAvailableFreeBoxesForMachineResponse" />
+<xs:element name="getAvailableProductCodes" type="tns:getAvailableProductCodes" />
+<xs:element name="getAvailableProductCodesResponse" type="tns:getAvailableProductCodesResponse" />
+<xs:element name="getAvailableTags" type="tns:getAvailableTags" />
+<xs:element name="getAvailableTagsResponse" type="tns:getAvailableTagsResponse" />
+<xs:element name="getCurrentMachineBoxesOverview" type="tns:getCurrentMachineBoxesOverview" />
+<xs:element name="getCurrentMachineBoxesOverviewResponse" type="tns:getCurrentMachineBoxesOverviewResponse" />
+<xs:element name="getCurrentMachineBoxesState" type="tns:getCurrentMachineBoxesState" />
+<xs:element name="getCurrentMachineBoxesStateResponse" type="tns:getCurrentMachineBoxesStateResponse" />
+<xs:element name="getMachineDetails" type="tns:getMachineDetails" />
+<xs:element name="getMachineDetailsResponse" type="tns:getMachineDetailsResponse" />
+<xs:element name="getMachineDetailsWithTagAndLifecycleStatus" type="tns:getMachineDetailsWithTagAndLifecycleStatus" />
+<xs:element name="getMachineDetailsWithTagAndLifecycleStatusResponse" type="tns:getMachineDetailsWithTagAndLifecycleStatusResponse" />
+<xs:element name="getMachinesWithTag" type="tns:getMachinesWithTag" />
+<xs:element name="getMachinesWithTagResponse" type="tns:getMachinesWithTagResponse" />
+<xs:element name="reserveCompartment" type="tns:reserveCompartment" />
+<xs:element name="reserveCompartmentResponse" type="tns:reserveCompartmentResponse" />
+<xs:complexType name="getMachinesWithTag">
+<xs:sequence>
+<xs:element minOccurs="0" name="tag" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="callerInfo">
+<xs:sequence />
+<xs:attribute name="sessionId" type="xs:string" />
+<xs:attribute name="userId" type="xs:string" />
+</xs:complexType>
+<xs:complexType name="getMachinesWithTagResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="machines" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getAvailableBoxSizes">
+<xs:sequence />
+</xs:complexType>
+<xs:complexType name="getAvailableBoxSizesResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="boxsizes" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getAvailableTags">
+<xs:sequence />
+</xs:complexType>
+<xs:complexType name="getAvailableTagsResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="tags" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCurrentMachineBoxesOverview">
+<xs:sequence>
+<xs:element minOccurs="0" name="deliveryMachineIdentification" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCurrentMachineBoxesOverviewResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="boxOverview" type="tns:dtMachineBoxesOverview" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="dtMachineBoxesOverview">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="boxGroups" nillable="true" type="tns:dtBoxGroup" />
+<xs:element maxOccurs="unbounded" minOccurs="0" name="devices" nillable="true" type="tns:dtDevice" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="dtBoxGroup">
+<xs:sequence>
+<xs:element minOccurs="0" name="amount" type="xs:int" />
+<xs:element minOccurs="0" name="boxSize" type="tns:boxSize" />
+<xs:element minOccurs="0" name="comfortZone" type="tns:comfortZone" />
+<xs:element minOccurs="0" name="logisticianIdentification" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="dtDevice">
+<xs:sequence>
+<xs:element name="boxNumber" type="xs:long" />
+<xs:element minOccurs="0" name="type" type="tns:deviceType" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="cancelReservation">
+<xs:sequence>
+<xs:element minOccurs="0" name="reservation" type="tns:dtReservation" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="dtReservation">
+<xs:sequence>
+<xs:element minOccurs="0" name="boxSize" type="tns:boxSize" />
+<xs:element minOccurs="0" name="comfortZone" type="tns:comfortZone" />
+<xs:element minOccurs="0" name="endTime" type="xs:dateTime" />
+<xs:element minOccurs="0" name="machineIdentification" type="xs:string" />
+<xs:element minOccurs="0" name="productCode" type="xs:string" />
+<xs:element minOccurs="0" name="startTime" type="xs:dateTime" />
+<xs:element minOccurs="0" name="userIdentification" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="cancelReservationResponse">
+<xs:sequence />
+</xs:complexType>
+<xs:complexType name="reserveCompartment">
+<xs:sequence>
+<xs:element minOccurs="0" name="reservationRequest" type="tns:dtReservation" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="reserveCompartmentResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="reservation" type="tns:dtReservation" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMachineDetailsWithTagAndLifecycleStatus">
+<xs:sequence>
+<xs:element minOccurs="0" name="tag" type="xs:string" />
+<xs:element minOccurs="0" name="lifecycleStatus" type="tns:machineLifecycleStatus" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMachineDetailsWithTagAndLifecycleStatusResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="machines" type="tns:dtDeliveryMachine" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="dtDeliveryMachine">
+<xs:sequence>
+<xs:element minOccurs="0" name="address" type="tns:dtMachineAddress" />
+<xs:element name="contacting" type="xs:boolean" />
+<xs:element maxOccurs="unbounded" minOccurs="0" name="devices" nillable="true" type="tns:dtDevice" />
+<xs:element minOccurs="0" name="identification" type="xs:string" />
+<xs:element minOccurs="0" name="lifecycleStatus" type="tns:machineLifecycleStatus" />
+<xs:element minOccurs="0" name="locationType" type="tns:machineLocationType" />
+<xs:element minOccurs="0" name="longDescription" type="xs:string" />
+<xs:element minOccurs="0" name="machineConfiguration" type="xs:string" />
+<xs:element maxOccurs="unbounded" minOccurs="0" name="machineProperties" nillable="true" type="tns:dtMachineProperty" />
+<xs:element minOccurs="0" name="model" type="xs:string" />
+<xs:element minOccurs="0" name="protocol" type="xs:string" />
+<xs:element minOccurs="0" name="serialNumber" type="xs:string" />
+<xs:element minOccurs="0" name="shortDescription" type="xs:string" />
+<xs:element maxOccurs="unbounded" minOccurs="0" name="tags" nillable="true" type="tns:dtTag" />
+<xs:element minOccurs="0" name="timeZone" type="xs:string" />
+<xs:element minOccurs="0" name="timeZoneOffset" type="xs:int" />
+<xs:element minOccurs="0" name="type" type="tns:machineConstructionType" />
+<xs:element minOccurs="0" name="vendor" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="dtMachineAddress">
+<xs:complexContent>
+<xs:extension base="tns:dtAddress">
+<xs:sequence>
+<xs:element minOccurs="0" name="lat" type="xs:string" />
+<xs:element minOccurs="0" name="lng" type="xs:string" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="dtAddress">
+<xs:sequence>
+<xs:element minOccurs="0" name="city" type="xs:string" />
+<xs:element minOccurs="0" name="countryCode" type="xs:string" />
+<xs:element minOccurs="0" name="field1" type="xs:string" />
+<xs:element minOccurs="0" name="field2" type="xs:string" />
+<xs:element minOccurs="0" name="field3" type="xs:string" />
+<xs:element minOccurs="0" name="zip" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="dtMachineProperty">
+<xs:sequence>
+<xs:element minOccurs="0" name="key" type="xs:string" />
+<xs:element minOccurs="0" name="value" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="dtTag">
+<xs:sequence>
+<xs:element minOccurs="0" name="tag" type="xs:string" />
+<xs:element minOccurs="0" name="type" type="tns:tagType" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getAvailableFreeBoxesForMachine">
+<xs:sequence>
+<xs:element minOccurs="0" name="deliveryMachineIdentification" type="xs:string" />
+<xs:element minOccurs="0" name="logisticianIdentification" type="xs:string" />
+<xs:element minOccurs="0" name="startTime" type="xs:dateTime" />
+<xs:element minOccurs="0" name="endTime" type="xs:dateTime" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getAvailableFreeBoxesForMachineResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="availableBoxes" type="tns:dtAvailableBoxes" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="dtAvailableBoxes">
+<xs:sequence>
+<xs:element minOccurs="0" name="boxSize" type="tns:boxSize" />
+<xs:element minOccurs="0" name="comfortZone" type="tns:comfortZone" />
+<xs:element name="freeCount" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCurrentMachineBoxesState">
+<xs:sequence>
+<xs:element minOccurs="0" name="deliveryMachineIdentification" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCurrentMachineBoxesStateResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="boxes" type="tns:dtBox" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="dtBox">
+<xs:sequence>
+<xs:element name="boxNumber" type="xs:long" />
+<xs:element minOccurs="0" name="boxSize" type="tns:boxSize" />
+<xs:element minOccurs="0" name="comfortZone" type="tns:comfortZone" />
+<xs:element name="defect" type="xs:boolean" />
+<xs:element minOccurs="0" name="logisticianIdentification" type="xs:string" />
+<xs:element maxOccurs="unbounded" minOccurs="0" name="parcels" nillable="true" type="xs:string" />
+<xs:element name="secured" type="xs:boolean" />
+<xs:element name="soiled" type="xs:boolean" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getAllMachines">
+<xs:sequence />
+</xs:complexType>
+<xs:complexType name="getAllMachinesResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="machines" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getAvailableProductCodes">
+<xs:sequence />
+</xs:complexType>
+<xs:complexType name="getAvailableProductCodesResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="productCodes" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMachineDetails">
+<xs:sequence>
+<xs:element minOccurs="0" name="deliveryMachineIdentification" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMachineDetailsResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="machine" type="tns:dtDeliveryMachine" />
+</xs:sequence>
+</xs:complexType>
+<xs:simpleType name="boxSize">
+<xs:restriction base="xs:string">
+<xs:enumeration value="XSmall" />
+<xs:enumeration value="Small" />
+<xs:enumeration value="Medium" />
+<xs:enumeration value="Large" />
+<xs:enumeration value="XLarge" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="comfortZone">
+<xs:restriction base="xs:string">
+<xs:enumeration value="A" />
+<xs:enumeration value="B" />
+<xs:enumeration value="C" />
+<xs:enumeration value="D" />
+<xs:enumeration value="E" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="deviceType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="LABEL_PRINTER" />
+<xs:enumeration value="RECEIPT_PRINTER" />
+<xs:enumeration value="PAYMENT_TERMINAL" />
+<xs:enumeration value="CASH_UNIT" />
+<xs:enumeration value="CARD_READER" />
+<xs:enumeration value="BARCODE_SCANNER" />
+<xs:enumeration value="RFID_READER" />
+<xs:enumeration value="TRACKBALL" />
+<xs:enumeration value="KEYBOARD" />
+<xs:enumeration value="ROUTER" />
+<xs:enumeration value="TOUCH" />
+<xs:enumeration value="CAMERA" />
+<xs:enumeration value="CAMERA_BAR" />
+<xs:enumeration value="VOIP" />
+<xs:enumeration value="COOLING_UNIT" />
+<xs:enumeration value="UPS" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="machineLifecycleStatus">
+<xs:restriction base="xs:string">
+<xs:enumeration value="PLANNED" />
+<xs:enumeration value="ACTIVE" />
+<xs:enumeration value="INACTIVE" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="machineLocationType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="Indoor" />
+<xs:enumeration value="Outdoor" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="tagType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="USER" />
+<xs:enumeration value="MACHINE" />
+<xs:enumeration value="TICKET" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="machineConstructionType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="UNKNOWN" />
+<xs:enumeration value="FS" />
+<xs:enumeration value="RS" />
+<xs:enumeration value="LS" />
+</xs:restriction>
+</xs:simpleType>
+<xs:element name="PublicServiceException" type="tns:PublicServiceException" />
+<xs:complexType name="PublicServiceException">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="parameters" type="xs:string" />
+<xs:element name="errorCode" nillable="true" type="xs:string" />
+<xs:element name="stackTraceString" nillable="true" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:element name="ReservationServiceException" type="tns:ReservationServiceException" />
+<xs:complexType name="ReservationServiceException">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="parameters" type="xs:string" />
+<xs:element name="errorCode" nillable="true" type="xs:string" />
+<xs:element name="stackTraceString" nillable="true" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:element name="CallerInfo" nillable="true" type="tns:callerInfo" />
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getAvailableTags">
+    <wsdl:part element="tns:getAvailableTags" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:CallerInfo" name="CallerInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMachineDetailsWithTagAndLifecycleStatus">
+    <wsdl:part element="tns:getMachineDetailsWithTagAndLifecycleStatus" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:CallerInfo" name="CallerInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMachineDetails">
+    <wsdl:part element="tns:getMachineDetails" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:CallerInfo" name="CallerInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllMachinesResponse">
+    <wsdl:part element="tns:getAllMachinesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCurrentMachineBoxesOverviewResponse">
+    <wsdl:part element="tns:getCurrentMachineBoxesOverviewResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="reserveCompartmentResponse">
+    <wsdl:part element="tns:reserveCompartmentResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAvailableFreeBoxesForMachine">
+    <wsdl:part element="tns:getAvailableFreeBoxesForMachine" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:CallerInfo" name="CallerInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMachineDetailsResponse">
+    <wsdl:part element="tns:getMachineDetailsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAvailableBoxSizesResponse">
+    <wsdl:part element="tns:getAvailableBoxSizesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCurrentMachineBoxesState">
+    <wsdl:part element="tns:getCurrentMachineBoxesState" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:CallerInfo" name="CallerInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cancelReservationResponse">
+    <wsdl:part element="tns:cancelReservationResponse" name="result">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAvailableFreeBoxesForMachineResponse">
+    <wsdl:part element="tns:getAvailableFreeBoxesForMachineResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCurrentMachineBoxesStateResponse">
+    <wsdl:part element="tns:getCurrentMachineBoxesStateResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ReservationServiceException">
+    <wsdl:part element="tns:ReservationServiceException" name="ReservationServiceException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMachineDetailsWithTagAndLifecycleStatusResponse">
+    <wsdl:part element="tns:getMachineDetailsWithTagAndLifecycleStatusResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllMachines">
+    <wsdl:part element="tns:getAllMachines" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:CallerInfo" name="CallerInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAvailableBoxSizes">
+    <wsdl:part element="tns:getAvailableBoxSizes" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:CallerInfo" name="CallerInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cancelReservation">
+    <wsdl:part element="tns:cancelReservation" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:CallerInfo" name="CallerInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCurrentMachineBoxesOverview">
+    <wsdl:part element="tns:getCurrentMachineBoxesOverview" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:CallerInfo" name="CallerInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMachinesWithTag">
+    <wsdl:part element="tns:getMachinesWithTag" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:CallerInfo" name="CallerInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAvailableProductCodes">
+    <wsdl:part element="tns:getAvailableProductCodes" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:CallerInfo" name="CallerInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAvailableProductCodesResponse">
+    <wsdl:part element="tns:getAvailableProductCodesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PublicServiceException">
+    <wsdl:part element="tns:PublicServiceException" name="PublicServiceException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAvailableTagsResponse">
+    <wsdl:part element="tns:getAvailableTagsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMachinesWithTagResponse">
+    <wsdl:part element="tns:getMachinesWithTagResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="reserveCompartment">
+    <wsdl:part element="tns:reserveCompartment" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:CallerInfo" name="CallerInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="WSReservationService">
+    <wsdl:operation name="getMachinesWithTag">
+      <wsdl:input message="tns:getMachinesWithTag" name="getMachinesWithTag">
+    </wsdl:input>
+      <wsdl:output message="tns:getMachinesWithTagResponse" name="getMachinesWithTagResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAvailableBoxSizes">
+      <wsdl:input message="tns:getAvailableBoxSizes" name="getAvailableBoxSizes">
+    </wsdl:input>
+      <wsdl:output message="tns:getAvailableBoxSizesResponse" name="getAvailableBoxSizesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAvailableTags">
+      <wsdl:input message="tns:getAvailableTags" name="getAvailableTags">
+    </wsdl:input>
+      <wsdl:output message="tns:getAvailableTagsResponse" name="getAvailableTagsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCurrentMachineBoxesOverview">
+      <wsdl:input message="tns:getCurrentMachineBoxesOverview" name="getCurrentMachineBoxesOverview">
+    </wsdl:input>
+      <wsdl:output message="tns:getCurrentMachineBoxesOverviewResponse" name="getCurrentMachineBoxesOverviewResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:PublicServiceException" name="PublicServiceException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="cancelReservation">
+      <wsdl:input message="tns:cancelReservation" name="cancelReservation">
+    </wsdl:input>
+      <wsdl:output message="tns:cancelReservationResponse" name="cancelReservationResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ReservationServiceException" name="ReservationServiceException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="reserveCompartment">
+      <wsdl:input message="tns:reserveCompartment" name="reserveCompartment">
+    </wsdl:input>
+      <wsdl:output message="tns:reserveCompartmentResponse" name="reserveCompartmentResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ReservationServiceException" name="ReservationServiceException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getMachineDetailsWithTagAndLifecycleStatus">
+      <wsdl:input message="tns:getMachineDetailsWithTagAndLifecycleStatus" name="getMachineDetailsWithTagAndLifecycleStatus">
+    </wsdl:input>
+      <wsdl:output message="tns:getMachineDetailsWithTagAndLifecycleStatusResponse" name="getMachineDetailsWithTagAndLifecycleStatusResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:PublicServiceException" name="PublicServiceException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getAvailableFreeBoxesForMachine">
+      <wsdl:input message="tns:getAvailableFreeBoxesForMachine" name="getAvailableFreeBoxesForMachine">
+    </wsdl:input>
+      <wsdl:output message="tns:getAvailableFreeBoxesForMachineResponse" name="getAvailableFreeBoxesForMachineResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ReservationServiceException" name="ReservationServiceException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCurrentMachineBoxesState">
+      <wsdl:input message="tns:getCurrentMachineBoxesState" name="getCurrentMachineBoxesState">
+    </wsdl:input>
+      <wsdl:output message="tns:getCurrentMachineBoxesStateResponse" name="getCurrentMachineBoxesStateResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:PublicServiceException" name="PublicServiceException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getAllMachines">
+      <wsdl:input message="tns:getAllMachines" name="getAllMachines">
+    </wsdl:input>
+      <wsdl:output message="tns:getAllMachinesResponse" name="getAllMachinesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAvailableProductCodes">
+      <wsdl:input message="tns:getAvailableProductCodes" name="getAvailableProductCodes">
+    </wsdl:input>
+      <wsdl:output message="tns:getAvailableProductCodesResponse" name="getAvailableProductCodesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMachineDetails">
+      <wsdl:input message="tns:getMachineDetails" name="getMachineDetails">
+    </wsdl:input>
+      <wsdl:output message="tns:getMachineDetailsResponse" name="getMachineDetailsResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:PublicServiceException" name="PublicServiceException">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSReservationServiceSoapBinding" type="tns:WSReservationService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getMachinesWithTag">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getMachinesWithTag">
+        <soap:header message="tns:getMachinesWithTag" part="CallerInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getMachinesWithTagResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAvailableBoxSizes">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getAvailableBoxSizes">
+        <soap:header message="tns:getAvailableBoxSizes" part="CallerInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getAvailableBoxSizesResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAvailableTags">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getAvailableTags">
+        <soap:header message="tns:getAvailableTags" part="CallerInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getAvailableTagsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCurrentMachineBoxesOverview">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getCurrentMachineBoxesOverview">
+        <soap:header message="tns:getCurrentMachineBoxesOverview" part="CallerInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getCurrentMachineBoxesOverviewResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="PublicServiceException">
+        <soap:fault name="PublicServiceException" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="cancelReservation">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="cancelReservation">
+        <soap:header message="tns:cancelReservation" part="CallerInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal" />
+      </wsdl:input>
+      <wsdl:output name="cancelReservationResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ReservationServiceException">
+        <soap:fault name="ReservationServiceException" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="reserveCompartment">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="reserveCompartment">
+        <soap:header message="tns:reserveCompartment" part="CallerInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal" />
+      </wsdl:input>
+      <wsdl:output name="reserveCompartmentResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ReservationServiceException">
+        <soap:fault name="ReservationServiceException" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getMachineDetailsWithTagAndLifecycleStatus">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getMachineDetailsWithTagAndLifecycleStatus">
+        <soap:header message="tns:getMachineDetailsWithTagAndLifecycleStatus" part="CallerInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getMachineDetailsWithTagAndLifecycleStatusResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="PublicServiceException">
+        <soap:fault name="PublicServiceException" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getAvailableFreeBoxesForMachine">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getAvailableFreeBoxesForMachine">
+        <soap:header message="tns:getAvailableFreeBoxesForMachine" part="CallerInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getAvailableFreeBoxesForMachineResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ReservationServiceException">
+        <soap:fault name="ReservationServiceException" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getAllMachines">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getAllMachines">
+        <soap:header message="tns:getAllMachines" part="CallerInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getAllMachinesResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCurrentMachineBoxesState">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getCurrentMachineBoxesState">
+        <soap:header message="tns:getCurrentMachineBoxesState" part="CallerInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getCurrentMachineBoxesStateResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="PublicServiceException">
+        <soap:fault name="PublicServiceException" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getAvailableProductCodes">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getAvailableProductCodes">
+        <soap:header message="tns:getAvailableProductCodes" part="CallerInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getAvailableProductCodesResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMachineDetails">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getMachineDetails">
+        <soap:header message="tns:getMachineDetails" part="CallerInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getMachineDetailsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="PublicServiceException">
+        <soap:fault name="PublicServiceException" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSReservationService">
+    <wsdl:port binding="tns:WSReservationServiceSoapBinding" name="WSReservationServiceImplPort">
+      <soap:address location="http://localhost:8880/connecta-public-services/services/WSReservationService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
