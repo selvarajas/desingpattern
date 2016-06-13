@@ -1,4 +1,4 @@
-package com.javacodegeeks.jms;
+package com.java.jms.message.listener;
 
 import java.net.URI;
 import java.net.URISyntaxException;

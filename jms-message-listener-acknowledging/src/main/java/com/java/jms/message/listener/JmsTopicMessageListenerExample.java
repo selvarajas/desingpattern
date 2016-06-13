@@ -1,4 +1,4 @@
-package com.javacodegeeks.jms;
+package com.java.jms.message.listener;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -8,45 +8,53 @@ import javax.jms.ConnectionFactory;
 import javax.jms.Message;
 import javax.jms.MessageConsumer;
 import javax.jms.MessageProducer;
-import javax.jms.Queue;
 import javax.jms.Session;
+import javax.jms.Topic;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.broker.BrokerFactory;
 import org.apache.activemq.broker.BrokerService;
 
-public class JmsMessageListenerExample {
+public class JmsTopicMessageListenerExample {
 	public static void main(String[] args) throws URISyntaxException, Exception {
 		BrokerService broker = BrokerFactory.createBroker(new URI(
 				"broker:(tcp://localhost:61616)"));
 		broker.start();
-		Connection connection = null;
+		Connection clientConnection = null;
 		try {
 			// Producer
 			ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
 					"tcp://localhost:61616");
-			connection = connectionFactory.createConnection();
-			Session session = connection.createSession(false,
+			clientConnection = connectionFactory.createConnection();
+			clientConnection.setClientID("TempTopicTest");
+			Session session = clientConnection.createSession(false,
 					Session.AUTO_ACKNOWLEDGE);
-			Queue queue = session.createQueue("customerQueue");
+			Topic topic = session.createTemporaryTopic();	
+			
+			// Consumer1 subscribes to customerTopic
+			MessageConsumer consumer1 = session.createConsumer(topic);
+			consumer1.setMessageListener(new ConsumerMessageListener("Consumer1"));
+			
+			// Consumer2 subscribes to customerTopic
+		    MessageConsumer consumer2 = session.createConsumer(topic);
+		    consumer2.setMessageListener(new ConsumerMessageListener("Consumer2"));
+		    
+			clientConnection.start();		
+			
+			// Publish
 			String payload = "Important Task";
 			Message msg = session.createTextMessage(payload);
-			MessageProducer producer = session.createProducer(queue);
+			MessageProducer producer = session.createProducer(topic);
 			System.out.println("Sending text '" + payload + "'");
 			producer.send(msg);
-
-			// Consumer
-			MessageConsumer consumer = session.createConsumer(queue);
-			consumer.setMessageListener(new ConsumerMessageListener("Consumer"));
-			connection.start();
-			Thread.sleep(1000);
+			
+			Thread.sleep(3000);
 			session.close();
 		} finally {
-			if (connection != null) {
-				connection.close();
+			if (clientConnection != null) {
+				clientConnection.close();
 			}
 			broker.stop();
 		}
 	}
-
 }
