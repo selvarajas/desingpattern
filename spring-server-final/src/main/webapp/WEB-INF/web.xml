@@ -42,7 +42,12 @@
 
 	<servlet-mapping>
 		<servlet-name>webservices</servlet-name>
-		<url-pattern>/endpoints/*</url-pattern>
+		<url-pattern>/endpoints/v1.0/*</url-pattern>
 	</servlet-mapping>
+	<!-- There didn't ought to be any sessions created but it's good practice 
+		to define a timeout as it varies for different containers. -->
+	<session-config>
+		<session-timeout>40</session-timeout>
+	</session-config>
 
 </web-app>

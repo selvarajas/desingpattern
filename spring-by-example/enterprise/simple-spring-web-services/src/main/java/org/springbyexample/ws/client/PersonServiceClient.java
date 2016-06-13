@@ -16,8 +16,6 @@
 
 package org.springbyexample.ws.client;
 
-import org.springbyexample.person.schema.beans.GetPersonsRequest;
-import org.springbyexample.person.schema.beans.PersonResponse;
 import org.springbyexample.ws.service.MarshallingPersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
