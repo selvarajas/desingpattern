@@ -15,7 +15,7 @@
  */
 package org.springbyexample.email;
 
-import java.util.Map;
+import java.util.Map; 
 
 import org.springframework.mail.SimpleMailMessage;
 
