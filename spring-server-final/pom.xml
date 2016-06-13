@@ -17,7 +17,7 @@
 		</repository>
 	</repositories>
 	<properties>
-		<spring.version>3.2.2.RELEASE</spring.version>
+		<spring.version>4.1.6.RELEASE</spring.version>
 		<spring.ws.version>2.0.0.RELEASE</spring.ws.version>
 		<log4j.version>1.2.16</log4j.version>
 		<context.path>spring-server</context.path>
@@ -93,16 +93,41 @@
 
 	<build>
 		<finalName>spring-server-final</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.1</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-		</plugins>
+		<pluginManagement>
+			<plugins>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.3.1</version>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>jaxb2-maven-plugin</artifactId>
+					<!-- Now do a maven-install 
+					mvn install -Dmaven.test.skip=true, 
+					
+					and 
+						you will get all required classes automatically created in target folder. 
+						See the picture below : -->
+					<executions>
+						<execution>
+							<goals>
+								<goal>xjc</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<schemaDirectory>src/main/webapp/schemas/</schemaDirectory>
+					</configuration>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
 	</build>
 </project>

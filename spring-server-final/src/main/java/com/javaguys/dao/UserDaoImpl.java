@@ -15,7 +15,7 @@ public class UserDaoImpl implements UserDao{
 	public User getUserDetails(String userId) {
 		
 		User user = new User();
-		String connectionURL = "jdbc:mysql://localhost:3306/userDB";
+		String connectionURL = "jdbc:mysql://localhost:3306/integration";
 		
 		Connection con = null;
 		try {
@@ -49,7 +49,7 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	public String saveUserDetails(User user) {
-		String connectionURL = "jdbc:mysql://localhost:3306/userDB";
+		String connectionURL = "jdbc:mysql://localhost:3306/integration";
 		
 		Connection con = null;
 		try {

@@ -12,6 +12,57 @@
 		<li><a href="endpoints/SaveUserService.wsdl">SaveUserService.wsdl</a>
 		</li>
 	</ul>
+	<p>1) Spring Web Services - Part 1 (Create JAXB classes
+		automatically using Maven)</p>
+	<p>2) Database Setup</p>
+	<p>Before we start writing code for the application let’s first
+		create a database that will be used by our application to save and
+		retrieve User’s data. Here is sql script : -- Dumping database
+		structure for userdb</p>
+	<p>CREATE DATABASE IF NOT EXISTS `userdb` /*!40100 DEFAULT
+		CHARACTER SET latin1 */; USE `userdb`;</p>
 
+	<p>-- Dumping structure for table userdb.user CREATE TABLE IF NOT
+		EXISTS `user` ( `id` varchar(10) DEFAULT NULL, `name` varchar(10)
+		DEFAULT NULL, `gender` varchar(10) DEFAULT NULL, `status` varchar(10)
+		DEFAULT NULL ) ENGINE=InnoDB DEFAULT CHARSET=latin1;</p>
+
+	<p>3) Create Simple Spring Web Service in Eclipse using Maven</p>
+
+	<p>Creating Spring Web Services in Eclipse using Maven is a four
+		step process, and everything will be done.</p>
+
+	<p>Step 1 : Create a simple Maven Project in Eclipse and add
+		required goal entries and dependencies details to pom.xml.</p>
+
+	<p>Step 2 : Create xsd files as per the functioning, the Web
+		Service is going to implement. Add them to project (ex.
+		/WEB-INF/schemas/..) , and generate classes using Maven.</p>
+
+	<p>Step 3 : Create an Endpoint, Service and Dao layer classes for
+		the application.</p>
+
+	<p>Step 4 : Create spring-configurations and test the Web Services.
+	</p>
+
+	<p>Now let’s discuss all these steps in details and create a simple
+		Web Service application step by step. Spring Web Services - Part 2
+		(Endpoint annotation and Database configuration)</p>
+
+	<p>Step 3 : Create an Endpoint, Service and Dao layer classes for
+		the application.</p>
+
+	<p>Step 4 : Create spring-configurations and entries in web.xml</p>
+
+	<p>Run the project on Server, if everything goes right you will get
+		a welcome page as shown below, click one of the link provided to see
+		the WSDL of related service.</p>
+	<p>Create WEB-INF under webapp folder and add web.xml and
+		spring-config.xml files there as follows.</p>
+	<p>Keep the application running on Server and copy the url, in our
+		case
+		http://localhost:8080/spring-server-final/endpoints/GetUserService.wsdl
+	</p>
+	<p>Refer: http://www.beingjavaguys.com/2013/04/spring-endpoint-annotation-example.html</p>
 </body>
 </html>
