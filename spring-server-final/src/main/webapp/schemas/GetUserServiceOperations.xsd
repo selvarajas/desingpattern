@@ -15,7 +15,7 @@
 	<xsd:element name="GetUserResponse">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element name="userDetails" type="user:User" />
+				<xsd:element name="userDetails" minOccurs="1" maxOccurs="unbounded" type="user:User" />
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>

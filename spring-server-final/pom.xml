@@ -23,10 +23,11 @@
 		<context.path>spring-server</context.path>
 	</properties>
 	<dependencies>
+
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>${log4j.version}</version>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.7.12</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -106,15 +107,22 @@
 					</configuration>
 				</plugin>
 
+				<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>jaxb2-maven-plugin</artifactId> 
+					Now do a maven-install mvn install -Dmaven.test.skip=true, and you will get 
+					all required classes automatically created in target folder. See the picture 
+					below : <executions> <execution> <goals> <goal>xjc</goal> </goals> </execution> 
+					</executions> <configuration> <schemaDirectory>src/main/webapp/schemas/</schemaDirectory> 
+					</configuration> </plugin> -->
+
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>jaxb2-maven-plugin</artifactId>
-					<!-- Now do a maven-install 
-					mvn install -Dmaven.test.skip=true, 
-					
-					and 
-						you will get all required classes automatically created in target folder. 
-						See the picture below : -->
+					<version>2.1</version>
+			<!-- 		Now do a maven-install mvn install -Dmaven.test.skip=true, and you
+					will get
+					all required classes automatically created in target folder. See the
+					picture
+					below : -->
 					<executions>
 						<execution>
 							<goals>
@@ -126,7 +134,37 @@
 						<schemaDirectory>src/main/webapp/schemas/</schemaDirectory>
 					</configuration>
 				</plugin>
+				<!-- <plugin>
+					<groupId>org.jvnet.jaxb2.maven2</groupId>
+					<artifactId>maven-jaxb2-plugin</artifactId>
+					<version>0.12.3</version>
+					<executions>
+						<execution>
+							<id>add-source-for-demoapp</id>
+							<goals>
+								<goal>generate</goal>
+							</goals>
+							<configuration>
+								<schemaDirectory>src/main/webapp/schemas/</schemaDirectory>
+								<schemaIncludes>
+									<include>GetUserServiceOperations.xsd</include>
+									<include>SaveUserServiceOperations.xsd</include>
+									<include>UserDetails.xsd</include>
+								</schemaIncludes>
+								<bindingDirectory>src/main/webapp/schemas/</bindingDirectory>
+								<bindingIncludes>
+									<include>GetUserServiceOperations.xjb</include>
+									<include>SaveUserServiceOperations.xjb</include>
+									<include>UserDetails.xjb</include>
+								</bindingIncludes>
+								<generateDirectory>/target/generated-sources/jaxb/xjc/workflow </generateDirectory>
+								<generatePackage>com.javaguys.webservices</generatePackage>
+								Other configuration options
 
+							</configuration>
+						</execution>
+					</executions>
+				</plugin> -->
 			</plugins>
 		</pluginManagement>
 	</build>
